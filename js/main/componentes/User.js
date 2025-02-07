@@ -6,14 +6,7 @@ export default class User {
 
     async fetchUsers() {
         return await this.apiStrategy.fetchUsers();
-      }
-    
-      async cadastrarUsuario(usuario) {
-        return await this.apiStrategy.cadastrarUsuario(usuario);
-      }
-    async buscarFaces() {
-        return await this.apiStrategy.buscarFaces();
-    };
+    }
 
     async buscarUsuariosRelatorio(){
         return await this.apiStrategy.buscarUsuariosRelatorio();

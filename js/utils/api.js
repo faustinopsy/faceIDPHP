@@ -54,8 +54,9 @@ export default class Api {
         }
     };
     async buscarUsuariosRelatorio(){
+        const id = localStorage.getItem('user');
         try {
-            const response = await fetch(`${this.apiUrl}UserRouter.php?relatorio=1`);
+            const response = await fetch(`${this.apiUrl}UserRouter.php?id=${id}`);
             const data = await response.json();
             console.log('Usuários recuperados:', data.usuarios);
             return data.usuarios;

@@ -20,20 +20,32 @@ class UserDAO {
         }
     }
 
+    public function generateUUIDv4(){
+        $data = random_bytes(16);
+        $data[6] = chr((ord($data[6]) & 0x0f) | 0x40);
+        $data[8] = chr((ord($data[8]) & 0x3f) | 0x80);
+
+        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+    }
+
     public function inserirUsuario($email) {
+        $id = $this->generateUUIDv4();
         try {
-            $stmt = $this->conexao->prepare("INSERT INTO users (email) VALUES (:email)");
+            $stmt = $this->conexao->prepare("INSERT INTO users (id, email) VALUES (:id, :email)");
+            $stmt->bindParam(':id', $id);
             $stmt->bindParam(':email', $email);
             $stmt->execute();
-            return $this->conexao->lastInsertId();
+            return $id;
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage());
         }
     }
 
     public function inserirRosto($userId, $rostoJson) {
+        $id = $this->generateUUIDv4();
         try {
-            $stmt = $this->conexao->prepare("INSERT INTO faces (idusers, faces) VALUES (:idusers, :faces)");
+            $stmt = $this->conexao->prepare("INSERT INTO faces (id,idusers, faces) VALUES (:id, :idusers, :faces)");
+            $stmt->bindParam(':id', $id);
             $stmt->bindParam(':idusers', $userId);
             $stmt->bindParam(':faces', $rostoJson);
             $stmt->execute();

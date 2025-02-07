@@ -63,6 +63,7 @@ class FaceRecognitionController {
             $closestVector = null;
             
             foreach ($usuarios as $usuario) {
+                unset($usuario['senha']);
                 $rostosCriptografados = $this->userDAO->buscarRostosPorUsuario($usuario['id']);
                 foreach ($rostosCriptografados as $rostoCriptografado) {
                     $rosto = $this->CriptoX->decryptDescriptor($rostoCriptografado);

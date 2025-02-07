@@ -26,7 +26,7 @@ class UserController {
                 $rostoCriptografado = $this->CriptoX->encryptDescriptor($rosto);
                 $this->userDAO->inserirRosto($userId, $rostoCriptografado);
             }
-            return ['status' => true, 'id' => $userId];
+            return ['status' => true, 'id' => $userId, 'message' => 'Cadastrado com sucesso'];
         } catch (PDOException $e) {
             return ['status' => false, 'error' => $e->getMessage()];
         }
@@ -55,6 +55,7 @@ class UserController {
         try {
             $usuario = $this->userDAO->buscarUsuarioPorId($id);
             if ($usuario) {
+                unset($usuario['senha']);
                 $usuario['rosto'] = $this->userDAO->buscarRostosPorUsuario($usuario['id']);
                 return ['status' => true, 'usuario' => $usuario];
             }

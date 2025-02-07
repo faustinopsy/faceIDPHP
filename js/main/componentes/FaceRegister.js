@@ -28,21 +28,24 @@ export default class FaceRegister {
         if (this.capturesInfo) {
             this.capturesInfo.textContent = `Capturas: ${this.captureData.length} de ${this.totalCaptures}`;
         }
+        if(this.captureData.length == 3){
+            document.getElementById('btnsave').hidden = false
+        }
     }
+
     handleFormChange(event) {
         const { value } = event.target;
         this.formData.email = value; 
     }
 
     async handleSave() {
-        console.log(this.formData)
         if (this.captureData.length === this.totalCaptures) {
             const usuario = { 
                 email: this.formData.email,  
                 rosto: this.captureData.map(descriptor => Array.from(descriptor))
             };
             const response = await this.apiStrategy.registrar(usuario);
-            if (response) {  
+            if (response.status) {  
                 this.modal.exibeModal(response.message);
                 this.captureData = [];
                 this.formData = { email: '' };
@@ -54,9 +57,10 @@ export default class FaceRegister {
     }
     clearFormFields() {
         document.querySelector('input[name="email"]').value = '';
+        document.getElementById('btnsave').hidden = true
     }
     async captureFace() {
-        if (this.captureData.length==3) {
+        if (this.captureData.length >= 3) {
             this.modal.exibeModal('Quantida de máxima de fotos atingida');
             return;
         }
@@ -66,7 +70,6 @@ export default class FaceRegister {
         ).withFaceLandmarks().withFaceDescriptor();
         if (detection) {
             const descriptor = detection.descriptor;
-            const landmarks = detection.landmarks;
             this.captureData.push(descriptor);
             console.log('Face captured successfully.');
             this.updateCapturesInfo();
@@ -97,7 +100,9 @@ export default class FaceRegister {
         container.appendChild(emailInput);
 
         const saveButton = document.createElement('button');
+        saveButton.id = 'btnsave';
         saveButton.textContent = 'Salvar Dados';
+        saveButton.hidden = true;
         saveButton.onclick = () => this.handleSave();
         container.appendChild(saveButton);
 

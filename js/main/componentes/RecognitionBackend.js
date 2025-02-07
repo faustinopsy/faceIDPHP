@@ -36,6 +36,7 @@ export default class RecognitionBackend {
               this.modal.exibeModal(`Rosto reconhecido: ${response.usuario.email} (${response.method} : ${response.distance.toFixed(3)})`);
               this.navbar.update(true);
               localStorage.setItem('isLoggedIn', 'true');
+              localStorage.setItem('user', response.usuario.id);
               this.onLoginSuccess();
         } else {
               this.modal.exibeModal("Rosto não reconhecido");
@@ -72,7 +73,7 @@ export default class RecognitionBackend {
         container.className = 'camera-container';
         container.appendChild(this.camera.render());
         const button = document.createElement('button');
-        button.textContent = 'Reconhecer (Backend)';
+        button.textContent = 'Reconhecer';
         button.onclick = () => this.recognize();
         container.appendChild(button);
         return container;

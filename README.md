@@ -36,6 +36,11 @@ Exemplo de um descritor facial:
 
 ```
 
+![Pontos](img/plot.png)
+
+
+
+
 # Distância Euclidiana
 
 ## Histórico
