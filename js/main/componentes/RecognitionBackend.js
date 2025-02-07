@@ -33,7 +33,7 @@ export default class RecognitionBackend {
         });
     
         if (response.status) {
-              this.modal.exibeModal(`Rosto reconhecido: ${response.usuario.email} (distância: ${response.distance.toFixed(3)})`);
+              this.modal.exibeModal(`Rosto reconhecido: ${response.usuario.email} (${response.method} : ${response.distance.toFixed(3)})`);
               this.navbar.update(true);
               localStorage.setItem('isLoggedIn', 'true');
               this.onLoginSuccess();

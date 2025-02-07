@@ -54,7 +54,7 @@ class FaceRecognitionController {
     }    
 
     public function recognize(array $inputDescriptor, $debug) {
-        $useCosineSimilarity = true;
+        $useCosineSimilarity = filter_var($_ENV['SIMILARIDADE'], FILTER_VALIDATE_BOOLEAN);
         $this->setDebug($debug);
         try {
             $usuarios = $this->userDAO->buscarTodosUsuarios();
@@ -104,6 +104,7 @@ class FaceRecognitionController {
                     'message' => 'Rosto reconhecido',
                     'usuario' => $bestMatch,
                     'distance' => $bestDistance,
+                    'method' => $useCosineSimilarity ? 'cosine_similarity' : 'euclidean_distance',
                     'debugPoints' => $debugData
                 ];
             } else {
