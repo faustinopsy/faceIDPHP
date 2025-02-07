@@ -1,0 +1,90 @@
+@startuml
+actor Administrador
+actor Aluno
+boundary "Interface do Usuário" as UI
+control "Sistema de Autenticação" as Autenticacao
+entity "Cadastro de Faces" as CadastroFaces
+entity "Gerenciamento de Usuários" as GerenciamentoUsuarios
+entity "Sistema de Presença" as Presenca
+database "Banco de Dados" as BD
+
+== Registro e Login do Administrador ==
+Administrador -> Autenticacao: Registrar
+activate Autenticacao
+Autenticacao -> BD: Salva Novo Usuário
+activate BD
+BD --> Autenticacao: Confirmação
+deactivate BD
+Autenticacao --> Administrador: Confirmação de Registro
+deactivate Autenticacao
+
+Administrador -> Autenticacao: Login
+activate Autenticacao
+Autenticacao -> BD: Verifica Credenciais
+activate BD
+BD --> Autenticacao: Confirmação
+deactivate BD
+Autenticacao --> Administrador: Confirmação de Login
+deactivate Autenticacao
+
+== Cadastro de Faces pelo Administrador ==
+Administrador -> UI: Acessa Cadastro de Faces
+activate UI
+UI -> CadastroFaces: Solicitação para Cadastrar Faces
+activate CadastroFaces
+CadastroFaces -> BD: Salva Dados da Face
+activate BD
+BD --> CadastroFaces: Confirmação
+deactivate BD
+CadastroFaces --> UI: Confirmação de Cadastro
+deactivate CadastroFaces
+deactivate UI
+
+== Visualização de Usuários pelo Administrador ==
+Administrador -> UI: Acessa Lista de Usuários
+activate UI
+UI -> GerenciamentoUsuarios: Solicita Usuários
+activate GerenciamentoUsuarios
+GerenciamentoUsuarios -> BD: Consulta Usuários
+activate BD
+BD --> GerenciamentoUsuarios: Lista de Usuários
+deactivate BD
+GerenciamentoUsuarios --> UI: Lista de Usuários
+deactivate GerenciamentoUsuarios
+deactivate UI
+
+== Gerenciamento de Presença pelo Administrador ==
+Administrador -> UI: Acessa Lista de Presença
+activate UI
+UI -> Presenca: Solicita Presenças
+activate Presenca
+Presenca -> BD: Consulta Presenças
+activate BD
+BD --> Presenca: Lista de Presenças
+deactivate BD
+Presenca --> UI: Lista de Presenças
+deactivate Presenca
+UI -> Presenca: Altera Presença (opcional)
+activate Presenca
+Presenca -> BD: Atualiza Presença
+activate BD
+BD --> Presenca: Confirmação de Alteração
+deactivate BD
+Presenca --> UI: Confirmação de Alteração
+deactivate Presenca
+deactivate UI
+
+== Marcação de Presença pelo Aluno ==
+Aluno -> UI: Acessa Marcação de Presença
+activate UI
+UI -> Presenca: Marca Presença (reconhecimento facial)
+activate Presenca
+Presenca -> BD: Registra Presença
+activate BD
+BD --> Presenca: Confirmação de Presença
+deactivate BD
+Presenca --> UI: Confirmação de Presença
+deactivate Presenca
+deactivate UI
+
+@enduml

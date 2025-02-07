@@ -1,0 +1,11 @@
+@startuml
+left to right direction
+actor Aluno
+
+package "Sistema de Reconhecimento Facial - Aluno" {
+  usecase "Marcar Presença via Reconhecimento Facial" as UC8
+}
+
+Aluno --> UC8
+
+@enduml

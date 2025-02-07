@@ -1,0 +1,25 @@
+@startuml
+left to right direction
+actor Administrador
+
+package "Sistema de Reconhecimento Facial - Admin" {
+  usecase "Auto Registro" as UC1
+  usecase "Fazer Login" as UC2
+  usecase "Cadastrar Novos Usuários" as UC3
+  usecase "Cadastrar Faces de Usuários" as UC4
+  usecase "Listar Usuários" as UC5
+  usecase "Visualizar Presenças" as UC6
+  usecase "Consultar Presença" as UC7
+  usecase "Alterar Presença" as UC8
+}
+
+Administrador --> UC1
+Administrador --> UC2
+Administrador -right-> UC3 : Depois de\nlogado
+Administrador -right-> UC4 : Depois de\nlogado 
+Administrador --> UC5 : Depois de\nlogado
+Administrador --> UC6 : Depois de\nlogado
+Administrador --> UC7 : Depois de\nlogado
+Administrador --> UC8 : Depois de\nlogado
+
+@enduml

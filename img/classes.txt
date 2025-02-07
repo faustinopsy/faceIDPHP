@@ -1,0 +1,60 @@
+@startuml
+
+
+package "Back-End PHP Classes" {
+    class UserController {
+        + insert()
+        + register()
+        + login()
+        + search()
+        + delete()
+    }
+    class PresencaController {
+        + registerPresence()
+        + searchPresence()
+        + updatePresence()
+        + deletePresence()
+    }
+    class Conexao {
+        + getConexao()
+    }
+    class Users {
+        - id : int
+        - nome : string
+        - registro : string
+        - rostos : array
+        - email : string
+        - senha : string
+        + setNome()
+        + setRegistro()
+        + setEmail()
+        + setSenha()
+        + getNome()
+        + getRegistro()
+        + getEmail()
+        + getSenha()
+    }
+    class Presenca {
+        - id : int
+        - idUsuario : int
+        - dataHora : string
+        - tipo : string
+        + setIdUsuario()
+        + setDataHora()
+        + setTipo()
+        + getIdUsuario()
+        + getDataHora()
+        + getTipo()
+    }
+}
+
+
+
+
+UserController ..> Users : uses
+PresencaController ..> Presenca : uses
+
+UserController ..> Conexao : uses
+PresencaController ..> Conexao : uses
+
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+
+package "Front-End Components" {
+    class Camera {
+        + activateCamera()
+        + render()
+    }
+    class FaceRegister {
+        + registerFace()
+        + render()
+    }
+    class Recognition {
+        + compareFaces()
+        + render()
+    }
+    class Presence {
+        + registerPresence()
+        + render()
+    }
+    class User {
+        + fetchUsers()
+        + registerUser()
+        + login()
+        + render()
+    }
+    class Auth {
+        + register()
+        + login()
+        + render()
+    }
+}
+
+
+
+Camera --> "index.html" : renders in
+FaceRegister --> "index.html" : renders in
+Recognition --> "index.html" : renders in
+Presence --> "index.html" : renders in
+User --> "index.html" : renders in
+Auth --> "index.html" : renders in
+
+
+
+@enduml
