@@ -151,3 +151,70 @@ function cosineSimilarity(array $vec1, array $vec2): float {
 2. Criptografia dos descritores: Os dados faciais são armazenados de forma segura.
 3. Alta precisão configurável: O sistema pode ser ajustado para diferentes níveis de sensibilidade no reconhecimento.
 4. Estrutura modular e escalável: Utiliza PSR-4 no backend, facilitando a manutenção e escalabilidade.
+
+## Requisitos
+1. PHP 8+
+2. MySQL
+3. Composer (para gerenciamento de dependências)
+
+Instalação
+Clone o repositório:
+```
+git clone https://github.com/faustinopsy/faceIDPHP.git
+cd faceIDPHP
+```
+Instale as dependências do Composer:
+```
+composer install
+```
+Configure o arquivo .env:
+Copie o arquivo .env.example para .env:
+```
+cp .env.example .env
+```
+Edite o arquivo .env com as configurações desejadas, como o algoritmo de similaridade e as credenciais do banco de dados:
+
+```
+CHAVE_CRIPTOGRAFIA=MinhaChaveUltraSecreta123456
+SIMILARIDADE=false  # true para Similaridade do Cosseno, false para Distância Euclidiana
+DATABASE_NAME=faceid
+DATABASE_HOST=localhost
+DATABASE_USER=root
+DATABASE_PASSWORD=
+```
+Crie o banco de dados:
+Execute o seguinte script SQL para criar o banco e as tabelas:
+
+```
+CREATE DATABASE faceid;
+USE faceid;
+
+CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(145) DEFAULT NULL,
+  `registro` varchar(45) DEFAULT NULL,
+  `email` varchar(245) DEFAULT NULL,
+  `senha` text,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `faces` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idusers` int DEFAULT NULL,
+  `faces` mediumtext,
+  PRIMARY KEY (`id`),
+  KEY `fk_faces_idx` (`idusers`),
+  CONSTRAINT `fk_faces` FOREIGN KEY (`idusers`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+```
+Inicie o servidor PHP:
+```
+php -S localhost:8000
+```
+Acesse a aplicação Abra o navegador em :
+```
+http://localhost:8000
+```
+## Configuração
+Similaridade: No arquivo .env, defina SIMILARIDADE=true para usar Similaridade do Cosseno ou false para Distância Euclidiana.
+Banco de Dados: Ajuste as configurações do banco no .env (nome, host, usuário e senha) conforme necessário.
