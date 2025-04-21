@@ -9,7 +9,7 @@ export default class Navbar {
         navbarElement.className = 'navbar';
 
         const menuItems = this.isUserLoggedIn
-            ? ['','register', 'backend', 'logout']
+            ? ['users', 'grafico', 'logout']
             : ['login','register'];
 
         menuItems.forEach(item => {

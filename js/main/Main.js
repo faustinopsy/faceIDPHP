@@ -22,6 +22,8 @@ function navigate(link) {
     
     if (link === 'logout') {
         localStorage.removeItem('isLoggedIn'); 
+        localStorage.removeItem('user'); 
+        location.hash = 'login';
         location.reload();
         
         return;
@@ -48,4 +50,4 @@ function navigate(link) {
 
 const navbar = new Navbar(navigate,isUserLoggedIn);
 document.body.insertBefore(navbar.render(), mainContainer);
-navigate(location.hash.substring(1))
+navigate('login')
