@@ -26,7 +26,7 @@ Os descritores faciais são vetores numéricos gerados a partir dos pontos-chave
 
 Durante o registro, um vetor de descritores é gerado para cada usuário e armazenado no banco de dados. Na autenticação, um novo vetor é gerado e comparado com os vetores armazenados, utilizando um dos algoritmos disponíveis:
 
-Distância Euclidiana: Mede a proximidade entre dois vetores de descritores. Quanto menor a distância, maior a similaridade entre os rostos.
+Distância Euclidiana: Mede a proximidade entre dois vetores de descritores. Quanto menor a distância, maior a similaridade entre os rostos.\n
 Similaridade do Cosseno: Mede o ângulo entre dois vetores. Valores próximos de 1 indicam alta similaridade, enquanto valores próximos de 0 indicam baixa similaridade.
 Exemplo de um descritor facial:
 ```
@@ -135,7 +135,7 @@ function cosineSimilarity(array $vec1, array $vec2): float {
 | **Métrica**              | **Distância Euclidiana** | **Similaridade do Cosseno** |
 |-------------------------|-----------------------|----------------------|
 | **Base Teórica**       | Distância geométrica  | Ângulo entre vetores |
-| **Valores Possíveis**  | \([0, \infty)\)       | \([-1,1]\)         |
+| **Valores Possíveis**  | \([0, \infty]\)       | \([-1,1]\)         |
 | **Sensível à Magnitude?** | Sim                 | Não                 |
 | **Melhor para...**     | Análise espacial, clustering | NLP, recomendação |
 
