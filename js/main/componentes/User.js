@@ -16,28 +16,33 @@ export default class User {
     };
 
     async render() {
-        const users = await this.buscarUsuariosRelatorio();
+        const userData = await this.buscarUsuariosRelatorio();
         const container = document.createElement('div');
         container.className = 'container';
-
+    
         const title = document.createElement('h1');
-        title.textContent = 'Usuários Cadastrados';
+        title.textContent = 'Usuário Logado';
         container.appendChild(title);
-
+    
         const userList = document.createElement('ul');
-        users.forEach(usuario => {
+        if (userData.status) {
+            const usuario = userData.usuario;
             const userItem = document.createElement('li');
             userItem.textContent = `${usuario.id} (E-mail: ${usuario.email}) `;
-
+    
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Excluir';
             deleteButton.onclick = () => this.confirmarExclusao(usuario);
             userItem.appendChild(deleteButton);
-
+    
             userList.appendChild(userItem);
-        });
+        } else {
+            const errorMessage = document.createElement('p');
+            errorMessage.textContent = 'Erro ao carregar usuário.';
+            container.appendChild(errorMessage);
+        }
         container.appendChild(userList);
-
+    
         return container;
     }
 

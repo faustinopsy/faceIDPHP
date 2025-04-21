@@ -33,14 +33,14 @@ class Conexao {
 
     private static function verificarImportacao() {
         try {
-            $stmt = self::$conexao->query("SELECT COUNT(*) FROM usuarios");
+            $stmt = self::$conexao->query("SELECT COUNT(*) FROM users");
             $totalUsuarios = $stmt->fetchColumn();
             
             if ($totalUsuarios == 0) {
                 self::importarBanco();
             }
         } catch (PDOException $e) {
-            error_log("Tabela 'usuarios' não encontrada. Tentando importar o banco...");
+            error_log("Tabela  não encontrada. Tentando importar o banco...");
             self::importarBanco();
         }
     }
