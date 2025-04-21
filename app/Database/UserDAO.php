@@ -20,6 +20,31 @@ class UserDAO {
         }
     }
 
+    
+        /**
+         * Gera um UUID versão 4 conforme RFC 4122.
+         *
+         * @return string UUID no formato xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+         * @throws Exception Se não for possível gerar bytes aleatórios
+         **/
+        /* melhoria para UUID
+        public function generateUUIDv4()
+        {
+            try {
+                // Gera 16 bytes de dados aleatórios seguros
+                $data = random_bytes(16);
+                // Ajusta o byte 6 para indicar versão 4 (0100 em binário)
+                $data[6] = chr((ord($data[6]) & 0x0f) | 0x40);
+                // Ajusta o byte 8 para indicar variante (10 em binário)
+                $data[8] = chr((ord($data[8]) & 0x3f) | 0x80);
+                // Converte para hexadecimal e formata no padrão UUID
+                return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+            } catch (Exception $e) {
+                throw new Exception('Erro ao gerar UUID: falha na geração de bytes aleatórios.');
+            }
+        }
+
+    */
     public function generateUUIDv4(){
         $data = random_bytes(16);
         $data[6] = chr((ord($data[6]) & 0x0f) | 0x40);
