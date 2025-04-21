@@ -14,6 +14,7 @@ export default class RecognitionBackend {
     }
 
     async recognize() {
+      this.modal.modalCarregamento("Procurando...");
         const detection = await faceapi.detectSingleFace(
             this.camera.videoElement, 
             new faceapi.TinyFaceDetectorOptions()
