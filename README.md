@@ -1,6 +1,8 @@
 # Aplicação de Reconhecimento Facial
 Esta aplicação é um Proof of Concept (POC) para um sistema de autenticação baseado em reconhecimento facial. O frontend é responsável por extrair os descritores faciais durante o registro, armazenando três descritores por indivíduo. O backend, além de salvar esses descritores no banco de dados, realiza a verificação utilizando Distância Euclidiana ou Similaridade do Cosseno para calcular a proximidade entre os pontos salvos e os pontos da tentativa de autenticação.
 
+- Obs. os dados são retonados para o frontend somente para realizar a visualização do gráfico de similaridade, se for usar em produção vá até o componente "js/main/Main.js" e altere "const debugEnabled" para false
+
 A precisão do reconhecimento pode ser ajustada através do parâmetro $threshold. Por padrão, um valor de 0.6 (60%) é utilizado, mas pode ser configurado para 0.9 (90%) para tornar o reconhecimento mais rigoroso e preciso.
 
 ## Tecnologias Utilizadas
