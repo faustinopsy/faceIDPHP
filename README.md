@@ -190,23 +190,19 @@ Execute o seguinte script SQL para criar o banco e as tabelas:
 ```
 CREATE DATABASE faceid;
 USE faceid;
-
 CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` varchar(300) NOT NULL,
   `nome` varchar(145) DEFAULT NULL,
   `registro` varchar(45) DEFAULT NULL,
   `email` varchar(245) DEFAULT NULL,
   `senha` text,
-  PRIMARY KEY (`id`)
+  `last_attempt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
-
 CREATE TABLE `faces` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `idusers` int DEFAULT NULL,
-  `faces` mediumtext,
-  PRIMARY KEY (`id`),
-  KEY `fk_faces_idx` (`idusers`),
-  CONSTRAINT `fk_faces` FOREIGN KEY (`idusers`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `id` varchar(300) NOT NULL,
+  `idusers` varchar(300) DEFAULT NULL,
+  `faces` longtext,
+  KEY `fk_faces_idx` (`idusers`)
 );
 ```
 Inicie o servidor PHP:
